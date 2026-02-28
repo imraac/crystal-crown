@@ -907,10 +907,10 @@ if (typeof module !== 'undefined' && module.exports) {
     let currentIndex = 0;
 
     const vehicles = {
-      sedan: { image: "public/Assets/sedan.png", title: "Sedan Detailing", price: "KES 5,500" },
-      suv: { image: "public/Assets/suv.png", title: "SUV Detailing", price: "KES 10,500" },
-      pickup: { image: "public/Assets/pickup.png", title: "Pickup Detailing", price: "KES 12,000" },
-      van: { image: "public/Assets/van.png", title: "Mini Van Detailing", price: "KES 14,000" }
+      sedan: { image: "Public/Assets/sedan.png", title: "Sedan Detailing", price: "KES 5,500" },
+      suv: { image: "Public/Assets/suv.png", title: "SUV Detailing", price: "KES 10,500" },
+      pickup: { image: "Public/Assets/pickup.png", title: "Pickup Detailing", price: "KES 12,000" },
+      van: { image: "Public/Assets/van.png", title: "Mini Van Detailing", price: "KES 14,000" }
     };
 
     const img = document.getElementById("carImage");
