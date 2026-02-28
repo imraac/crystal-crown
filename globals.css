@@ -658,50 +658,67 @@ p {
 .nav__link.is-active::after {
   transform: scaleX(1);
 }
-
 /* Dropdown */
 .nav__dropdown {
   position: relative;
 }
 
+/* MENU */
 .nav__dropdown-menu {
   position: absolute;
-  top: calc(100% + var(--space-4));
+  top: 110%;
   left: 50%;
-  transform: translateX(-50%) translateY(-8px);
-  background: var(--clr-surface);
-  border: 1px solid var(--clr-border);
-  border-radius: var(--radius-md);
-  padding: var(--space-2);
-  min-width: 14rem;
-  box-shadow: var(--shadow-lg);
+  transform: translateX(-50%) translateY(8px);
+
+  min-width: 16rem;
+  padding: 0.6rem;
+
+  /* Clean solid dark surface */
+  background: white; /* deep clean dark */
+  border: 1px solid #1f232b;
+
+  border-radius: 14px;
+
+
+
   opacity: 0;
-  pointer-events: none;
-  transition:
-    opacity var(--dur-base) var(--ease-out),
-    transform var(--dur-base) var(--ease-out);
+  visibility: hidden;
+  transition: 
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
+/* Show */
 .nav__dropdown:hover .nav__dropdown-menu,
 .nav__dropdown:focus-within .nav__dropdown-menu {
   opacity: 1;
-  pointer-events: all;
+  visibility: visible;
   transform: translateX(-50%) translateY(0);
 }
 
+/* Items */
 .nav__dropdown-item {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius-sm);
-  font-size: var(--fs-sm);
-  color: var(--clr-text-muted);
-  transition: background var(--dur-fast), color var(--dur-fast);
+  gap: 0.75rem;
+
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  color: #020202; /* soft light text */
+  transition: all 0.18s ease;
 }
 
+/* Hover */
 .nav__dropdown-item:hover {
-  background: rgba(26,143,227,0.1);
+  background: #18324b; /* subtle dark hover */
+  color: #3a71b1;
+}
+.nav__dropdown-item:hover {
+  background: rgba(248, 250, 252, 0.1);
   color: var(--clr-white);
 }
 
@@ -1373,7 +1390,6 @@ color: #000;
 }
 
 .footer__legal-link:hover { color: var(--clr-text-muted); }
-
 /* ─── Page Hero (inner pages) ────────────────────────────────── */
 .page-hero {
   padding: calc(var(--nav-height) + var(--space-16)) 0 var(--space-16);
@@ -1382,21 +1398,38 @@ color: #000;
   overflow: hidden;
 }
 
+/* Main glow */
 .page-hero::before {
   content: '';
   position: absolute;
-  width: 50vw;
-  height: 50vw;
+  width: 55vw;
+  height: 55vw;
   border-radius: var(--radius-full);
-  background: var(--clr-primary);
+  background: radial-gradient(circle, #030303, #4b4b4d, transparent 70%);
   filter: blur(120px);
-  opacity: 0.1;
-  top: -20%;
+  opacity: 0.25;
+  top: -25%;
   left: 50%;
   transform: translateX(-50%);
   pointer-events: none;
 }
 
+/* Second glow */
+.page-hero::after {
+  content: '';
+  position: absolute;
+  width: 45vw;
+  height: 45vw;
+  border-radius: var(--radius-full);
+  background: radial-gradient(circle, #131414, #1a8fe3, transparent 70%);
+  filter: blur(140px);
+  opacity: 0.18;
+  bottom: -30%;
+  right: -10%;
+  pointer-events: none;
+}
+
+/* Breadcrumb */
 .page-hero__breadcrumb {
   display: flex;
   align-items: center;
@@ -1407,14 +1440,20 @@ color: #000;
   margin-bottom: var(--space-5);
 }
 
-.page-hero__breadcrumb a { transition: color var(--dur-fast); }
-.page-hero__breadcrumb a:hover { color: var(--clr-primary-light); }
-.page-hero__breadcrumb-sep { color: var(--clr-text-faint); }
+.page-hero__breadcrumb a {
+  transition: color var(--dur-fast);
+}
 
+.page-hero__breadcrumb a:hover {
+  color: #6d5dfc;
+}
+
+.page-hero__breadcrumb-sep {
+  color: var(--clr-text-faint);
+}
 /* ─── Divider ────────────────────────────────────────────────── */
 .divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--clr-border), transparent);
   margin: var(--space-8) 0;
 }
 
@@ -1492,6 +1531,35 @@ color: #000;
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+
+
+/* Make form input, textarea, and select text visible on white background */
+.booking-form .form-input,
+.booking-form .form-textarea,
+.booking-form .form-select {
+  color: #000;              /* Black text */
+  background-color: #fff;   /* White background */
+  border: 1px solid #ccc;   /* Light gray border */
+}
+
+/* Placeholder color slightly muted */
+.booking-form .form-input::placeholder,
+.booking-form .form-textarea::placeholder,
+.booking-form .form-select option[disabled] {
+  color: #666;              /* Medium gray */
+}
+
+/* Focus state for accessibility */
+.booking-form .form-input:focus,
+.booking-form .form-textarea:focus,
+.booking-form .form-select:focus {
+  border-color: #1a8fe3;    /* Your primary blue */
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(26,143,227,0.2); /* subtle glow */
+}
+
+
+
 
 /* ─── Scroll Animations ──────────────────────────────────────── */
 .reveal {
@@ -1952,17 +2020,42 @@ margin-top: var(--nav-height);
     font-size:14px;
   }
 
-  .nav-buttons{
-    flex-direction:column;
-    align-items:center;
-    gap:10px;
-  }
+  .nav-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    z-index: 10; /* make sure buttons are on top */
+}
 
-  .nav-buttons button{
-    width:100%;
-    max-width:250px;
-  }
+.nav-buttons button {
+    width: 100%;
+    max-width: 250px;
+    background-color: #1a8fe3; /* make sure this is not overridden */
+    color: #be1b1b; /* text color */
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    pointer-events: auto; /* ensure it can be clicked */
+}
 
+.nav-buttons button:hover {
+    background-color: #dd1212;
+    color: #1a8fe3;
+    transform: scale(1.05) skewX(-10deg);
+    box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+}
+
+.nav-buttons button:active {
+    transform: scale(0.95);
+    box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+}
   .modal-content{
     margin:20% auto;
     padding:20px;
