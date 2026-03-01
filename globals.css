@@ -1739,24 +1739,45 @@ color: #000;
 }
 
 /* ─── Service Detail Cards (from services.html) ───────────────── */
+/* Base Card */
 .service-detail-card {
-  background: var(--clr-surface);
-  border: 1px solid var(--clr-border);
+  background: #0c0c0c; /* black */
+  border: 1px solid #1a8fe3; /* blue border */
   border-radius: var(--radius-xl);
-  overflow: hidden;
+  overflow: visible; /* allow price to show outside if needed */
   transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base);
+  color: #ffffff; /* default text white */
 }
 
-.service-detail-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-blue); }
+/* Hover effect */
+.service-detail-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(26, 143, 227, 0.5); /* blue shadow */
+}
 
+/* Header */
 .service-detail-card__header {
-  padding: var(--space-8);
-  background: linear-gradient(135deg, var(--clr-bg-3), var(--clr-surface));
-  border-bottom: 1px solid var(--clr-border);
+  padding: var(--space-0);
+  background: linear-gradient(135deg, #0c0c0c, #1a1a1a); /* dark gradient */
+  border-bottom: 1px solid #1a8fe3; /* blue line */
 }
 
-.service-detail-card__body { padding: var(--space-8); }
+/* Header flex container */
+.service-detail-card__header > div {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap; /* allow stacking on small cards */
+}
 
+/* Body */
+.service-detail-card__body {
+  padding: var(--space-8);
+  color: #ffffff; /* body text white */
+}
+
+/* Includes List */
 .service-detail-card__includes {
   display: flex;
   flex-direction: column;
@@ -1769,14 +1790,59 @@ color: #000;
   align-items: center;
   gap: var(--space-3);
   font-size: var(--fs-sm);
-  color: var(--clr-text-muted);
+  color: #ffffff; /* white list items */
 }
 
 .service-detail-card__includes li::before {
   content: '✓';
-  color: var(--clr-accent);
+  color: #1a8fe3; /* blue checkmark */
   font-weight: var(--fw-bold);
   flex-shrink: 0;
+}
+
+/* Price Styling */
+.price-container {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl); /* desktop */
+  font-weight: var(--fw-black);
+  color: #1a8fe3; /* blue */
+  text-align: right;
+  flex-shrink: 0; /* prevent shrinking */
+}
+
+.price-subtext {
+  font-size: var(--fs-xs);
+  color: #b0cfff; /* light blue */
+}
+
+/* Small screen adjustments */
+@media (max-width: 700px) {
+  .service-detail-card__header > div {
+    flex-direction: column; /* stack title and price */
+    align-items: flex-start;
+  }
+
+  .price-container {
+    text-align: left;
+    font-size: 1.5rem; /* smaller on mobile */
+    margin-top: 0.5rem;
+  }
+}
+
+/* Badges */
+.badge--primary {
+  background-color: #1a8fe3; /* blue */
+  color: #ffffff; /* white text */
+}
+
+.badge--accent {
+  background-color: #0fc0ff; /* lighter blue */
+  color: #000; /* black text */
+}
+
+.badge--success {
+  background-color: #12dd12; /* green */
+  color: #000; /* black text */
 }
 
 /* ─── Room Grid & Cards (from house-cleaning.html) ────────────── */
@@ -2032,21 +2098,23 @@ margin-top: var(--nav-height);
 .nav-buttons button {
     width: 100%;
     max-width: 250px;
-    background-color: #1a8fe3; /* make sure this is not overridden */
-    color: #be1b1b; /* text color */
+    background-color: #0c0c0c; /* make sure this is not overridden */
+    color: #fcf6f6; /* text color */
     border: none;
     padding: 12px 25px;
     font-size: 16px;
     font-weight: 600;
     border-radius: 8px;
     cursor: pointer;
+     position: relative;  /* add this */
+    z-index: 999;        /* higher value ensures it’s on top */
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     pointer-events: auto; /* ensure it can be clicked */
 }
 
 .nav-buttons button:hover {
-    background-color: #dd1212;
+    background-color: #131110;
     color: #1a8fe3;
     transform: scale(1.05) skewX(-10deg);
     box-shadow: 0 6px 10px rgba(0,0,0,0.15);
@@ -2063,12 +2131,17 @@ margin-top: var(--nav-height);
 }
 @media (max-width: 700px) {
   .header {
-    padding-top: 5px !important;   /* very tight */
-    margin-top: -500px !important;      /* remove extra space */
+    padding-top: 10px;  /* small top padding */
+    margin-top: 0;      /* remove negative margin */
   }
 
   body {
-    padding-top: 0 !important;     /* remove any extra top padding */
+    padding-top: 0;
+  }
+
+  .nav-buttons button {
+    max-width: 90%;       /* responsive width */
+    font-size: 14px;      /* slightly smaller on mobile */
   }
 }
 /* VEHICLE SECTION */
@@ -2161,9 +2234,22 @@ margin-top: var(--nav-height);
     gap:20px;
 }
 
-.select{
+.select {
   color: #000;
-  margin-top: -30px;
+  margin-top: -50px; /* desktop default */
+}
+
+/* Adjust margin for smaller screens */
+@media (max-width: 700px) {
+  .select {
+    margin-top: -00px; /* push it below the previous element */
+  }
+}
+
+@media (max-width: 400px) {
+  .select {
+    margin-top: 5px; /* extra tight for very small phones */
+  }
 }
 
 .before-after-section {
