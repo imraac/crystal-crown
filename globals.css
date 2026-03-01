@@ -1289,46 +1289,59 @@ p {
 }
 
 /* ─── CTA Banner ─────────────────────────────────────────────── */
-.cta-banner {
-background-color: white; 
+/* ─── CTA Banner with Phone Mockup ───────────────────────────── */
+.section--cta-phone .cta-phone__wrapper {
+  display: flex;
+  flex-direction: column; /* stack on mobile */
+  align-items: center;
+  gap: var(--space-5);
+}
 
-  padding: var(--space-16) var(--space-12);
+.section--cta-phone .cta-banner {
+  background-color: #ffffff; /* keep white */
   text-align: center;
+  padding: var(--space-16) var(--space-12);
   position: relative;
   overflow: hidden;
+  max-width: 500px;
 }
 
-.cta-banner::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at center, rgba(0,212,255,0.12) 0%, transparent 65%);
+.section--cta-phone .cta-banner__title,
+.section--cta-phone .cta-banner__subtitle {
+  color: #000; /* black text */
 }
 
-.cta-banner > * { position: relative; z-index: 1; }
-
-.cta-banner__title {
-  font-size: var(--fs-2xl);
-  font-weight: var(--fw-black);
-  margin-bottom: var(--space-4);
-  color: #000;
-}
-
-.cta-banner__subtitle {
-  font-size: var(--fs-md);
-color: #000;
-  margin-bottom: var(--space-8);
-}
-
-.cta-banner__actions {
+.section--cta-phone .phone-mockup {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-4);
   justify-content: center;
+  align-items: center;
 }
 
+.phone-mockup__img {
+  max-width: 450px;
+  width: 100%;
+  height: auto;
+  
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
+.phone-mockup__img:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(249, 250, 250, 0.4);
+}
 
+/* Desktop: text left, phone right */
+@media (min-width: 992px) {
+  .section--cta-phone .cta-phone__wrapper {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .section--cta-phone .cta-banner {
+    text-align: left;
+  }
+}
 /* ─── Footer ─────────────────────────────────────────────────── */
 .footer {
   background: white;
@@ -2652,3 +2665,8 @@ margin-top: var(--nav-height);
     translate: 0 -1px;
   }
 }
+
+
+
+
+
