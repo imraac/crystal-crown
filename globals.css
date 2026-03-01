@@ -26,7 +26,7 @@
   --clr-border-light:   rgba(255, 255, 255, 0.07);
 
   /* Text */
-  --clr-text:           #e8f0fe;
+  --clr-text:           #0a0a0a;
   --clr-text-muted:     #7e9bbf;
   --clr-text-faint:     #050505;
   --clr-white:          #ffffff;
@@ -1046,11 +1046,10 @@ p {
   font-size: var(--fs-xs);
   color: var(--clr-text-faint);
 }
-
-/* ─── Pricing Cards ──────────────────────────────────────────── */
+/* ─── Pricing Cards / Forms ──────────────────────────────────── */
 .pricing-card {
-  background: var(--clr-surface);
-  border: 1px solid var(--clr-border);
+  background: #000000; /* solid black background */
+  border: 1px solid #333; /* subtle border for contrast */
   border-radius: var(--radius-lg);
   padding: var(--space-8);
   display: flex;
@@ -1058,11 +1057,12 @@ p {
   gap: var(--space-5);
   transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base);
   position: relative;
+  color: #ffffff; /* all text white by default */
 }
 
 .pricing-card--popular {
   border-color: var(--clr-primary);
-  box-shadow: var(--shadow-blue);
+  box-shadow: 0 8px 20px rgba(26, 143, 227, 0.4);
 }
 
 .pricing-card__popular-badge {
@@ -1071,7 +1071,7 @@ p {
   left: 50%;
   transform: translateX(-50%);
   background: linear-gradient(90deg, var(--clr-primary), var(--clr-accent));
-  color: var(--clr-white);
+  color: #ffffff;
   font-size: var(--fs-xs);
   font-weight: var(--fw-semi);
   padding: var(--space-1) var(--space-5);
@@ -1082,45 +1082,46 @@ p {
 }
 
 .pricing-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-blue);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(26, 143, 227, 0.5);
 }
 
 .pricing-card__name {
   font-size: var(--fs-md);
   font-weight: var(--fw-bold);
-  color: var(--clr-white);
+  color: #ffffff; /* service name white */
 }
 
 .pricing-card__price {
   display: flex;
   align-items: baseline;
-  gap: var(--space-1);
+  gap: var(--space-2);
 }
 
 .pricing-card__amount {
   font-family: var(--font-display);
-  font-size: var(--fs-3xl);
+  font-size: 2.25rem;
   font-weight: var(--fw-black);
-  color: var(--clr-white);
+  color: var(--clr-accent); /* keep price highlighted */
   line-height: 1;
 }
 
 .pricing-card__currency {
   font-size: var(--fs-md);
-  color: var(--clr-text-muted);
+  color: var(--clr-text-muted); /* lighter for currency */
   align-self: flex-start;
   margin-top: var(--space-2);
 }
 
 .pricing-card__period {
   font-size: var(--fs-sm);
-  color: var(--clr-text-muted);
+  color: #ffffff; /* make duration visible */
 }
 
 .pricing-card__divider {
   height: 1px;
-  background: var(--clr-border-light);
+  background: #333; /* subtle divider */
+  margin: var(--space-4) 0;
 }
 
 .pricing-card__features {
@@ -1135,13 +1136,82 @@ p {
   align-items: flex-start;
   gap: var(--space-3);
   font-size: var(--fs-sm);
-  color: var(--clr-text-muted);
+  color: #ffffff; /* features text white */
 }
 
 .pricing-card__feature-icon {
-  color: var(--clr-accent);
+  color: var(--clr-primary); /* icon accent */
   flex-shrink: 0;
   margin-top: 2px;
+}
+
+
+
+/* ─── Car Detailing Table ─────────────────────────────────────── */
+.section table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: var(--fs-sm);
+  background: #000000; /* black table background */
+  color: #ffffff; /* default text white */
+}
+
+.section table thead tr {
+  background: #111111; /* slightly lighter header */
+}
+
+.section table thead th {
+  color: #ffffff !important; /* white header text */
+  font-weight: var(--fw-semi);
+  border-bottom: 1px solid #333;
+  padding: var(--space-4) var(--space-6);
+}
+
+.section table tbody tr {
+  border-bottom: 1px solid #333;
+}
+
+.section table tbody tr td {
+  padding: var(--space-4) var(--space-6);
+  color: var(--clr-accent) !important; /* force white for normal text */
+}
+
+.section table tbody tr td:nth-child(2),
+.section table tbody tr td:nth-child(2) {
+  color: var(--clr-accent) !important; /* highlight price column (Hatchback/Sedan) */
+}
+
+.section table tbody tr td:nth-child(3),
+.section table tbody tr td:nth-child(4),
+.section table tbody tr td:nth-child(5) {
+  color: #110c0c !important; /* other text white, can adjust if needed */
+}
+
+.section table tbody tr td a.btn {
+  background: var(--clr-primary);
+  color: #ffffff;
+}
+
+.section table tbody tr:nth-child(even) {
+  background: #111111; /* subtle alternating row color */
+}
+
+.section table tbody tr:nth-child(odd) {
+  background: #000000;
+}
+
+.section div[style*="background:var(--clr-surface)"] {
+  background: #111 !important; /* vehicle note box black */
+  border: 1px solid #333 !important;
+}
+
+.section div[style*="color:var(--clr-text-muted)"] {
+  color: #ffffff !important; /* note text white */
+}
+
+.section p {
+  color: #ffffff !important;
 }
 
 /* ─── FAQ Accordion ──────────────────────────────────────────── */
@@ -2351,10 +2421,11 @@ margin-top: var(--nav-height);
 
 /* Feature cards */
 .feature-card {
-  background-color:  #1a8fe3;
+  background-color: #1a8fe3;
   color: #fff;
   padding: 15px;
   text-align: left;
+  border-radius: 8px;
 }
 
 /* Center Image */
@@ -2362,18 +2433,38 @@ margin-top: var(--nav-height);
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center; /* center vertically on small screens */
 }
 
 .center-image img {
   width: 100%;
-  max-width: 450px; /* adjust as needed */
+  max-width: 450px;
   height: auto;
-  margin-top: 10px; /* less top margin */
+  margin-top: 10px;
 }
 
+/* Small screens: stack content vertically and center everything */
+@media (max-width: 700px) {
+  .content-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
 
+  .features-left,
+  .features-right {
+    max-width: 100%; /* full width on mobile */
+    align-items: center; /* center feature cards */
+  }
 
+  .feature-card {
+    text-align: center; /* center text for mobile */
+  }
+
+  .center-image img {
+    max-width: 80%; /* smaller and centered */
+    margin-top: 20px;
+  }
+}
 
 
 
