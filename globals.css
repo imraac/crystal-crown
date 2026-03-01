@@ -1288,48 +1288,103 @@ p {
   line-height: var(--lh-loose);
 }
 
-/* ─── CTA Banner ─────────────────────────────────────────────── */
-/* ─── CTA Banner with Phone Mockup ───────────────────────────── */
+/* ─────────────────────────────────────────────
+   CTA Section With Phone Mockup
+───────────────────────────────────────────── */
+
+.section--cta-phone {
+  padding: var(--space-16) var(--space-6);
+  background: #ffffff;
+}
+
 .section--cta-phone .cta-phone__wrapper {
   display: flex;
-  flex-direction: column; /* stack on mobile */
+  flex-direction: column; /* Mobile first */
   align-items: center;
-  gap: var(--space-5);
-}
-
-.section--cta-phone .cta-banner {
-  background-color: #ffffff; /* keep white */
+  justify-content: center;
+  gap: 40px;
   text-align: center;
-  padding: var(--space-16) var(--space-12);
-  position: relative;
-  overflow: hidden;
-  max-width: 500px;
 }
 
-.section--cta-phone .cta-banner__title,
+/* Text Area */
+.cta-phone__text {
+  max-width: 520px;
+}
+
+.section--cta-phone .cta-banner__title {
+  font-size: 38px;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  color: #000;
+}
+
 .section--cta-phone .cta-banner__subtitle {
-  color: #000; /* black text */
+  font-size: 16px;
+  color: #444;
+  margin-bottom: 24px;
 }
 
-.section--cta-phone .phone-mockup {
+/* Buttons */
+.cta-banner__actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-banner__actions .btn {
+  padding: 10px 22px;   /* smaller buttons */
+  font-size: 14px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+/* Optional subtle hover */
+.cta-banner__actions .btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Phone Mockup */
+.cta-phone__mockup {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .phone-mockup__img {
-  max-width: 450px;
+  max-width: 360px;   /* reduced from 450px */
   width: 100%;
   height: auto;
-  
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .phone-mockup__img:hover {
   transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(249, 250, 250, 0.4);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
 }
 
+/* ─────────────────────────────────────────────
+   Desktop Layout
+───────────────────────────────────────────── */
+
+@media (min-width: 992px) {
+  .section--cta-phone .cta-phone__wrapper {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .cta-banner__actions {
+    justify-content: flex-start;
+  }
+
+  .cta-phone__text {
+    flex: 1;
+  }
+
+  .cta-phone__mockup {
+    flex: 1;
+  }
+}
 /* Desktop: text left, phone right */
 @media (min-width: 992px) {
   .section--cta-phone .cta-phone__wrapper {
@@ -1822,42 +1877,61 @@ p {
 }
 
 /* ─── Service Detail Cards (from services.html) ───────────────── */
+/* ─────────────────────────────────
+   Service Detail Card (Dark Pro)
+───────────────────────────────── */
+
 /* Base Card */
 .service-detail-card {
-  background: #0c0c0c; /* black */
-  border: 1px solid #1a8fe3; /* blue border */
+  background: #0c0c0c;
+  border: 1px solid #1a8fe3;
   border-radius: var(--radius-xl);
-  overflow: visible; /* allow price to show outside if needed */
-  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base);
-  color: #ffffff; /* default text white */
+  overflow: hidden; /* FIX rounded top */
+  transition: transform var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Hover effect */
+/* Hover */
 .service-detail-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(26, 143, 227, 0.5); /* blue shadow */
+  transform: translateY(-6px);
+  box-shadow: 0 15px 40px rgba(26, 143, 227, 0.35);
 }
 
 /* Header */
 .service-detail-card__header {
-  padding: var(--space-0);
-  background: linear-gradient(135deg, #0c0c0c, #1a1a1a); /* dark gradient */
-  border-bottom: 1px solid #1a8fe3; /* blue line */
+  padding: var(--space-8); /* FIX spacing */
+  background: linear-gradient(135deg, #0c0c0c, #151515);
+  border-bottom: 1px solid rgba(26, 143, 227, 0.4);
 }
 
-/* Header flex container */
+/* Header layout */
 .service-detail-card__header > div {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: var(--space-4);
-  flex-wrap: wrap; /* allow stacking on small cards */
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+
+/* Left header content */
+.service-detail-card__header h2 {
+  font-size: 1.4rem; /* controlled size */
+  margin: 0;
+}
+
+.service-detail-card__header p {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: #bfc9d4;
 }
 
 /* Body */
 .service-detail-card__body {
   padding: var(--space-8);
-  color: #ffffff; /* body text white */
+  flex-grow: 1;
 }
 
 /* Includes List */
@@ -1866,52 +1940,62 @@ p {
   flex-direction: column;
   gap: var(--space-2);
   margin-top: var(--space-5);
+  padding-left: 0;
+  list-style: none;
 }
 
 .service-detail-card__includes li {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--space-3);
-  font-size: var(--fs-sm);
-  color: #ffffff; /* white list items */
+  font-size: 0.9rem;
+  color: #e6edf3;
+  line-height: 1.6;
 }
 
 .service-detail-card__includes li::before {
-  content: '✓';
-  color: #1a8fe3; /* blue checkmark */
-  font-weight: var(--fw-bold);
+  content: "✓";
+  color: #1a8fe3;
+  font-weight: bold;
+  margin-top: 2px;
   flex-shrink: 0;
 }
 
-/* Price Styling */
+/* Price */
 .price-container {
   font-family: var(--font-display);
-  font-size: var(--fs-2xl); /* desktop */
+  font-size: 1.6rem;
   font-weight: var(--fw-black);
-  color: #1a8fe3; /* blue */
+  color: #1a8fe3;
   text-align: right;
-  flex-shrink: 0; /* prevent shrinking */
+  flex-shrink: 0;
 }
 
 .price-subtext {
-  font-size: var(--fs-xs);
-  color: #b0cfff; /* light blue */
+  font-size: 0.75rem;
+  color: #8fbdf0;
+  margin-top: 4px;
 }
 
-/* Small screen adjustments */
+/* Buttons inside card */
+.service-detail-card .btn {
+  margin-top: var(--space-6);
+}
+
+/* Mobile adjustments */
 @media (max-width: 700px) {
+
   .service-detail-card__header > div {
-    flex-direction: column; /* stack title and price */
+    flex-direction: column;
     align-items: flex-start;
   }
 
   .price-container {
     text-align: left;
-    font-size: 1.5rem; /* smaller on mobile */
-    margin-top: 0.5rem;
+    font-size: 1.3rem;
+    margin-top: 8px;
   }
 }
-
 /* Badges */
 .badge--primary {
   background-color: #1a8fe3; /* blue */
