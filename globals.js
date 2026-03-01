@@ -584,22 +584,7 @@ const CookieBanner = {
     banner.id = 'cookie-banner';
     banner.setAttribute('role', 'dialog');
     banner.setAttribute('aria-label', 'Cookie consent');
-    banner.innerHTML = `
-      <div style="position:fixed;bottom:var(--space-5);left:50%;transform:translateX(-50%);z-index:var(--z-modal);
-        background:var(--clr-surface-2);border:1px solid var(--clr-border);border-radius:var(--radius-md);
-        padding:var(--space-5) var(--space-6);max-width:min(600px, calc(100% - var(--space-8)));width:100%;
-        display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-4);box-shadow:var(--shadow-lg);
-        animation:toast-in .5s var(--ease-out) forwards">
-        <p style="font-size:var(--fs-sm);color:var(--clr-text-muted);flex:1;min-width:200px">
-          🍪 We use cookies to improve your experience. 
-          <a href="privacy.html" style="color:var(--clr-primary-light);text-decoration:underline">Learn more</a>
-        </p>
-        <div style="display:flex;gap:var(--space-3);flex-shrink:0">
-          <button class="btn btn--ghost btn--sm" id="cookie-decline">Decline</button>
-          <button class="btn btn--primary btn--sm" id="cookie-accept">Accept</button>
-        </div>
-      </div>
-    `;
+   
     document.body.appendChild(banner);
 
     $('#cookie-accept').addEventListener('click', () => {
@@ -897,8 +882,6 @@ if (typeof module !== 'undefined' && module.exports) {
   };
 }
 
-//# select vehicle type script 
-
 (function () {
 
   function initVehicleScripts() {
@@ -907,38 +890,25 @@ if (typeof module !== 'undefined' && module.exports) {
     let currentIndex = 0;
 
     const vehicles = {
-      sedan: { image: "Public/Assets/sedan.png", title: "Sedan Detailing", price: "KES 5,500" },
-      suv: { image: "Public/Assets/suv.png", title: "SUV Detailing", price: "KES 10,500" },
-      pickup: { image: "Public/Assets/pickup.png", title: "Pickup Detailing", price: "KES 12,000" },
-      van: { image: "Public/Assets/van.png", title: "Mini Van Detailing", price: "KES 14,000" }
+      sedan: { image: "Public/Assets/sedan.png" },
+      suv: { image: "Public/Assets/suv.png" },
+      pickup: { image: "Public/Assets/pickup.png" },
+      van: { image: "Public/Assets/van.png" }
     };
 
     const img = document.getElementById("carImage");
-    const modal = document.getElementById("packageModal");
-    const content = document.getElementById("modalContent");
 
-   
-    if (!img || !modal || !content) return;
-
-    vehicleKeys.forEach(key => {
-      const preloaded = new Image();
-      preloaded.src = vehicles[key].image;
-    });
+    if (!img) return;
 
     function updateImage(type) {
-      img.classList.add("fade");
-
-      setTimeout(() => {
-        img.src = vehicles[type].image;
-        img.classList.remove("fade");
-      }, 200);
+      img.src = vehicles[type].image;
     }
 
     function selectVehicle(type, buttonElement = null) {
       currentIndex = vehicleKeys.indexOf(type);
       updateImage(type);
 
-      document.querySelectorAll(".vehicle-types button")
+      document.querySelectorAll(".vs-vehicle-types button")
         .forEach(btn => btn.classList.remove("active"));
 
       if (buttonElement) buttonElement.classList.add("active");
@@ -954,7 +924,7 @@ if (typeof module !== 'undefined' && module.exports) {
       selectVehicle(vehicleKeys[currentIndex]);
     }
 
-    document.querySelectorAll(".vehicle-types button")
+    document.querySelectorAll(".vs-vehicle-types button")
       .forEach(btn => {
         btn.addEventListener("click", function () {
           const type = this.dataset.vehicle;
@@ -964,31 +934,13 @@ if (typeof module !== 'undefined' && module.exports) {
 
     const nextBtn = document.getElementById("nextCarBtn");
     const prevBtn = document.getElementById("prevCarBtn");
-    const bookBtn = document.getElementById("bookNowBtn");
 
     if (nextBtn) nextBtn.addEventListener("click", nextCar);
     if (prevBtn) prevBtn.addEventListener("click", prevCar);
-    if (bookBtn) bookBtn.addEventListener("click", openModal);
-
 
     selectVehicle(vehicleKeys[currentIndex]);
   }
 
-  if (document.readyState !== "loading") {
-    initVehicleScripts();
-  } else {
-    document.addEventListener("DOMContentLoaded", initVehicleScripts);
-  }
+  document.addEventListener("DOMContentLoaded", initVehicleScripts);
 
 })();
-
-
-if (scrollY > 80) {
-  this.nav.classList.add('is-scrolled');
-} else {
-  this.nav.classList.remove('is-scrolled');
-}
-
-
-
-
